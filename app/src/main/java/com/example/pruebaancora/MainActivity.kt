@@ -58,7 +58,7 @@ import kotlinx.coroutines.flow.StateFlow
 import coil.compose.rememberAsyncImagePainter
 
 sealed class ScreenState {
-    object HomeScreen: ScreenState()
+    data object HomeScreen: ScreenState()
     data class UserScreen(val username: String): ScreenState()
     data class GalleryScreen(val username: String, val imageID: Int = 1): ScreenState()
 }
@@ -66,10 +66,10 @@ sealed class ScreenState {
 sealed class ScreenEvent {
     data class GoToUserScreen(val username: String) : ScreenEvent()
     data class GoToGalleryScreen(val username: String): ScreenEvent()
-    object GoBackToHomeScreen : ScreenEvent()
-    object GoBackToUserScreen : ScreenEvent()
-    object NextImage: ScreenEvent()
-    object LastImage : ScreenEvent()
+    data object GoBackToHomeScreen : ScreenEvent()
+    data object GoBackToUserScreen : ScreenEvent()
+    data object NextImage: ScreenEvent()
+    data object LastImage : ScreenEvent()
 }
 
 class MainViewModel: ViewModel() {
@@ -245,7 +245,7 @@ fun UserScreen(
                     )
                 }
                 Text(
-                    text = "Bienvenido, ${username}",
+                    text = "Bienvenido, $username",
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 30.sp,
                     modifier = Modifier.padding(top = 40.dp)
